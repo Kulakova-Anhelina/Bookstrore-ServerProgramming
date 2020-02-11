@@ -26,6 +26,7 @@ public class BookstoreDatabaseApplication {
 	@Bean
 	public CommandLineRunner demo(BookRepository brepository, CategoryRepository crepository) {
 		return (args) -> {
+			//save the book 
 			log.info("save a couple of students");
 			crepository.save(new Category("Classic"));
 			crepository.save(new Category("Horror"));
