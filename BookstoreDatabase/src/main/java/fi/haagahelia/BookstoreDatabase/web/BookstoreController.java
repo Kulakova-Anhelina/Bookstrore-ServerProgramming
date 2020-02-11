@@ -21,7 +21,6 @@ public class BookstoreController {
 	private CategoryRepository crepository; 
 		
 	
-
 	 @RequestMapping(value={"/", "/booklist"})
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
@@ -29,6 +28,7 @@ public class BookstoreController {
 
 	}
 
+	// add ab book
 	@RequestMapping(value = "/add")
 	public String addStudent(Model model) {
 		model.addAttribute("books", new Book());
