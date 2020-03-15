@@ -12,6 +12,10 @@ import fi.haagahelia.BookstoreDatabase.domain.Book;
 import fi.haagahelia.BookstoreDatabase.domain.BookRepository;
 import fi.haagahelia.BookstoreDatabase.domain.Category;
 import fi.haagahelia.BookstoreDatabase.domain.CategoryRepository;
+import fi.haagahelia.BookstoreDatabase.domain.User;
+import fi.haagahelia.BookstoreDatabase.domain.UserRepository;
+
+
 
 @SpringBootApplication
 public class BookstoreDatabaseApplication {
@@ -24,9 +28,9 @@ public class BookstoreDatabaseApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(BookRepository brepository, CategoryRepository crepository) {
+	public CommandLineRunner demo(BookRepository brepository, CategoryRepository crepository, UserRepository urepository) {
 		return (args) -> {
-			//save the book...
+			// save the book...
 			log.info("save a couple of students");
 			crepository.save(new Category("Classic"));
 			crepository.save(new Category("Horror"));
@@ -46,7 +50,11 @@ public class BookstoreDatabaseApplication {
 			brepository.save(y);
 			brepository.save(y1);
 			brepository.save(y2);
-
+			// Create users: admin/admin user/user
+			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
+			User user2 = new User("admin", "$2a$10$0MMwY.IQqpsVc1jC8u7IJ.2rT8b0Cd3b3sfIBGV2zfgnPGtT4r0.C", "ADMIN");
+			urepository.save(user1);
+			urepository.save(user2);
 			log.info("fetch all books");
 			for (Book book : brepository.findAll()) {
 				log.info(book.toString());
