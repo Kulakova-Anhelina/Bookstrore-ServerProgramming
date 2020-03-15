@@ -32,7 +32,7 @@ public class BookstoreController {
 	}
 
 	// show all the book
-	@RequestMapping(value = { "/", "/booklist" })
+	@RequestMapping(value = { "/booklist" })
 	public String bookList(Model model) {
 		model.addAttribute("books", repository.findAll());
 		return "booklist";
@@ -75,6 +75,7 @@ public class BookstoreController {
 	}
 
 	// edit book
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public String edit(@PathVariable("id") Long bookId, Model model) {
 		model.addAttribute("books", repository.findById(bookId));
